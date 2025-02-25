@@ -15,7 +15,7 @@ by run the maki compiler (`mc.exe`) with those syntax.
 | <<= | ✅ | `x <<= y;` |
 | >>= | ✅ | `x >>= y;` |
 | &= | ✅ | `x &= y;` |
-| &VerticalLine;= | ✅ | `x &VerticalLine;= y;` |
+| &VerticalLine;= | ✅ | x &VerticalLine;= y; |
 | ^= | ✅ | `x ^= y;` |
 | =  | ✅ | `x = y;`  |
 | ~= | ❌ | `x ~= y;` |
