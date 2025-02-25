@@ -1,0 +1,37 @@
+//----------------------------------------------------------------------------------------------------------------
+// std.mi
+//
+// standard definitions for internal objects
+//----------------------------------------------------------------------------------------------------------------
+
+#ifndef __STD_MI
+#define __STD_MI
+
+#define MC_TARGET "Winamp 5.66 (skin version 1.36)"
+#define VCPU_VERSION 2
+
+// GUIDS
+extern class @{51654971-0D87-4a51-91E3-A6B53235F3E7}@ @{00000000-0000-0000-0000-000000000000}@ Object;
+extern class @{D6F50F64-93FA-49b7-93F1-BA66EFAE3E98}@ Object _predecl System;
+
+#ifndef true
+#define true 1
+#endif
+#ifndef TRUE
+#define TRUE 1
+#endif
+#ifndef false
+#define false 0
+#endif
+#ifndef FALSE
+#define FALSE 0
+#endif
+
+
+
+.CODE
+
+.STACKPROT
+
+#endif
+
