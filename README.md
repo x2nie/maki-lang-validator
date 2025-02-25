@@ -20,6 +20,7 @@ by run the maki compiler (`mc.exe`) with those syntax.
 | &VerticalLine;= | ✅ | x &VerticalLine;= y; |
 | ~= | ❌ | `x ~= y;` |
 | = ~ | ❌ | `x = ~y;` |
+| !=  | ✅ | `{ x != y; }` |
 | = ! | ✅ | `x = !y;` |
-| =! | ✅ | `x =! y;` |
+| =!  | ✅ | `x =! y;` |
 | ? | ❌ | `x =  x > 0 ? : y;` |

@@ -49,7 +49,7 @@ coding(int x, int y)
 '''
 
 if 1:
-    assignments = "*= /= %= += -= <<= >>= &= |= ^= = ~=".split(' ')
+    assignments = "*= /= %= += -= <<= >>= &= |= ^= = ~= !=".split(' ')
     for op in assignments:
         name = get_name(op)
         # print(name)

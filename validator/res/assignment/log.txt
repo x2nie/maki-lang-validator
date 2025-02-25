@@ -27,4 +27,4 @@ Linking... OK
 Writing binary...
 Writing Test binary... OK      
 
-/home/fathony/Documents/X2NIE/WINAMP/maki-lang-validator/validator/res/assignment/eqmark.m (18 loc) was compiled to eqmark.maki (176 bytes) in 179 ms
+/home/fathony/Documents/X2NIE/WINAMP/maki-lang-validator/validator/res/assignment/mark-eq.m (18 loc) was compiled to mark-eq.maki (175 bytes) in 2 ms
