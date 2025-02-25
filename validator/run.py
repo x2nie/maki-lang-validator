@@ -36,4 +36,5 @@ def compile(mfile):
 
 if __name__ == '__main__':
 
-    compile('mc/test.m')
+    # compile('mc/test.m')
+    compile('res/assignment/star-eq.m')
