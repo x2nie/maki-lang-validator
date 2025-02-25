@@ -23,4 +23,6 @@ by run the maki compiler (`mc.exe`) with those syntax.
 | !=  | ✅ | `{ x != y; }` | `x = x ! y;`  |
 | = ! | ✅ | `x = !y;` | x = !y;`  |
 | =!  | ✅ | `x =! y;` | `x = !y;`  |
+| ? | ❌ | `x =  x ? x : y;` | `if(x != 0) x = x; else x = y;`  |
 | ? | ❌ | `x =  x < 0 ? 0 : y;` | `if(x < 0) x = 0; else x = y;`  |
+| ? | ❌ | `x =  (x < 0) ? 0 : y;` | `if(x < 0) x = 0; else x = y;`  |

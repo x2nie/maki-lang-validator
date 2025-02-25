@@ -12,6 +12,6 @@ function int coding(int, int);
 
 coding(int x, int y)
 {
-    x = x < 0 ? 0 : y;
+    x = (x < 0) ? 0 : y;
     return x;
 }

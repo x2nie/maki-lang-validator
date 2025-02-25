@@ -2,7 +2,7 @@ MC - Maki Compiler v1.2.0
 (c)2001-2006, Nullsoft Inc.
 
 Preprocessing...
-OK: 342 bytes, 18 lines, 1 file
+OK: 344 bytes, 18 lines, 1 file
 Compiling... 
 Compiling... line 2 
 Compiling... line 3 
@@ -19,9 +19,9 @@ Compiling... line 13
 Compiling... line 14 
                                                         
 
-syntax error at /home/fathony/Documents/X2NIE/WINAMP/maki-lang-validator/validator/res/misc/question.m:15 [15] : 
+syntax error at /home/fathony/Documents/X2NIE/WINAMP/maki-lang-validator/validator/res/misc/question.m:15 [17] : 
 
-    x = x < 0 ? 0 : y;
+    x = (x < 0) ? 0 : y;
 
 
 Exited with code 4
