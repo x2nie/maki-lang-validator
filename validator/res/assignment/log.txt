@@ -17,11 +17,14 @@ Compiling... line 11
 Compiling... line 12 
 Compiling... line 13 
 Compiling... line 14 
-                                                        
+Compiling... line 15 
+Compiling... line 16 
+Compiling... line 17 
+Compiling... line 18 
+Compiling... OK       
+Linking...
+Linking... OK      
+Writing binary...
+Writing Test binary... OK      
 
-syntax error at /home/fathony/Documents/X2NIE/WINAMP/maki-lang-validator/validator/res/assignment/eq-tilde.m:15 [9] : 
-
-    x = ~y;
-
-
-Exited with code 4
+/home/fathony/Documents/X2NIE/WINAMP/maki-lang-validator/validator/res/assignment/eqmark.m (18 loc) was compiled to eqmark.maki (176 bytes) in 179 ms

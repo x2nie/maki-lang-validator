@@ -39,4 +39,6 @@ if __name__ == '__main__':
     # compile('mc/test.m')
     # compile('res/assignment/star-eq.m')
     # compile('res/misc/question.m')
-    compile('res/assignment/eq-tilde.m')
+    # compile('res/assignment/eq-tilde.m')
+    compile('res/assignment/eq-mark.m')
+    compile('res/assignment/eqmark.m')
