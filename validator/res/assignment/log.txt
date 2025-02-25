@@ -2,7 +2,7 @@ MC - Maki Compiler v1.2.0
 (c)2001-2006, Nullsoft Inc.
 
 Preprocessing...
-OK: 331 bytes, 18 lines, 1 file
+OK: 330 bytes, 18 lines, 1 file
 Compiling... 
 Compiling... line 2 
 Compiling... line 3 
@@ -27,4 +27,4 @@ Linking... OK
 Writing binary...
 Writing Test binary... OK      
 
-/home/fathony/Documents/X2NIE/WINAMP/maki-lang-validator/validator/res/assignment/star-eq.m (18 loc) was compiled to star-eq.maki (181 bytes) in 2 ms
+/home/fathony/Documents/X2NIE/WINAMP/maki-lang-validator/validator/res/assignment/eq.m (18 loc) was compiled to eq.maki (175 bytes) in 1 ms

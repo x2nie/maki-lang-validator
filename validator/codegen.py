@@ -1,11 +1,12 @@
 import os
 import subprocess
+from run import compile
 
 CURDIR = os.path.dirname(__file__)
 os.chdir(CURDIR)
 
 
-name = {
+NAMES = {
     '*': 'star',
     '=': 'eq',
     '/': 'slash',
@@ -22,7 +23,7 @@ name = {
 def get_name(symbols):
     result = ''
     for s in symbols:
-        result += name.get(s,f'-unknown-') 
+        result += NAMES.get(s,f'-unknown-') 
         result += '-'
     result = result.strip('-')
     return result
@@ -56,7 +57,9 @@ if 1:
         print(stat)
         # print(tpl % stat)
 
-        with open(f'res/assignment/{name}.m', 'w') as f:
+        mpath = f'res/assignment/{name}.m'
+        with open(mpath, 'w') as f:
             f.write(tpl % stat)
 
-        break
+        compile(mpath)
+        # break
