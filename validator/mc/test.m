@@ -21,9 +21,10 @@ Global System t;
 
 System.onStart()
 {
+	int i = 1;
 	do
 	{
-		int i = 0;
+		i = 0;
 	} while (i);
 }
 
