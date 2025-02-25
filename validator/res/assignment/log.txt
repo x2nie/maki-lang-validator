@@ -19,9 +19,9 @@ Compiling... line 13
 Compiling... line 14 
                                                         
 
-syntax error at /home/fathony/Documents/X2NIE/WINAMP/maki-lang-validator/validator/res/assignment/tilde-eq.m:15 [7] : 
+syntax error at /home/fathony/Documents/X2NIE/WINAMP/maki-lang-validator/validator/res/assignment/eq-tilde.m:15 [9] : 
 
-    x ~= y;
+    x = ~y;
 
 
 Exited with code 4

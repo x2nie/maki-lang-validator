@@ -19,4 +19,5 @@ by run the maki compiler (`mc.exe`) with those syntax.
 | ^= | ✅ | `x ^= y;` |
 | =  | ✅ | `x = y;`  |
 | ~= | ❌ | `x ~= y;` |
+| = ~ | ❌ | `x = ~y;` |
 | ? | ❌ | `x =  x > 0 ? : y;` |
