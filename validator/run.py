@@ -32,9 +32,10 @@ def compile(mfile):
             os.remove(there_makifile)
         os.rename(here_makifile, there_makifile)
 
-    print("Done.")
+    # print("Done.")
 
 if __name__ == '__main__':
 
     # compile('mc/test.m')
-    compile('res/assignment/star-eq.m')
+    # compile('res/assignment/star-eq.m')
+    compile('res/misc/question.m')

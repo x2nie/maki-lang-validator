@@ -19,6 +19,7 @@ NAMES = {
     '^': 'caret',
     '~': 'tilde',
     '|': 'vbar',
+    '!': 'mark',
 }
 def get_name(symbols):
     result = ''
@@ -48,13 +49,13 @@ coding(int x, int y)
 '''
 
 if 1:
-    assignments = "*= /= %= += -= <<= >>= &= ^= =".split(' ')
+    assignments = "*= /= %= += -= <<= >>= &= |= ^= = ~=".split(' ')
     for op in assignments:
         name = get_name(op)
-        print(name)
+        # print(name)
 
         stat = f"x {op} y;"
-        print(stat)
+        print(f"| {op} | ✅ | `{stat}` |")
         # print(tpl % stat)
 
         mpath = f'res/assignment/{name}.m'
