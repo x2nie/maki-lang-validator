@@ -22,7 +22,17 @@ def compile(mfile):
     with open(os.path.join(outdir, "log.txt"), "w") as file:
         file.write(result.stdout or result.stderr)
 
-    print("Hasil eksekusi telah disimpan ke dalam done-abc.txt")
+    #? move the compiled maki into the source-code's folder
+    makifilepath = f'{mfile}aki' 
+    makifilename = os.path.split( makifilepath )[1]
+    here_makifile = os.path.join( CURDIR, makifilename )
+    if os.path.exists(here_makifile):
+        there_makifile = os.path.join(outdir, makifilename)
+        if os.path.exists(there_makifile):
+            os.remove(there_makifile)
+        os.rename(here_makifile, there_makifile)
+
+    print("Done.")
 
 if __name__ == '__main__':
 
