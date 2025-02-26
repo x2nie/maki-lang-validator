@@ -7,12 +7,13 @@ export type SkinPath = {
 
 export function downloaSkins(skins: SkinPath[]){
     skins.forEach( skin =>
-        downloaSkin(skin.download_url)
+        downloaSkin(skin)
     )
 }
 
-async function downloaSkin(skinPath: string){
-    const response = await fetch(skinPath);
+async function downloaSkin(skin: SkinPath):Promise<boolean>{
+    const {download_url, filename} = skin;
+    const response = await fetch(download_url);
     const skinZipBlob = await response.blob();
     const zip = await JSZip.loadAsync(skinZipBlob);
 
@@ -22,8 +23,22 @@ async function downloaSkin(skinPath: string){
     const files = zip.file(pattern);
 
     if (files) {
-        console.log(skinPath, 'File ditemukan:', files.length);
+        console.log(filename, 'File ditemukan:', files.length);
+        fetch("/res/add", {
+            method: "POST",
+            body: JSON.stringify({
+                download_url, 
+                filename,
+                userId: 1,
+                title: "Fix my bugs",
+                completed: false
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+          });
     } else {
         // console.log('File tidak ditemukan');
     }
+    return files && files.length > 0
 }
