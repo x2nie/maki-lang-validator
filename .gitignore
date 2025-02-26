@@ -15,6 +15,7 @@ dist-ssr
 *.pyc
 
 /validator/skins/raw/*
+/validator/skins/extracted/*
 
 # Editor directories and files
 .vscode/*

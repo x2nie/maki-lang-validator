@@ -1,0 +1,423 @@
+
+from makifile import MakiFile
+from typing import List, Dict, Union, Optional, TypedDict
+import os
+CURDIR = os.path.dirname(__file__)
+os.chdir(CURDIR)
+
+# Constants and types
+MAGIC = "FG"
+COMMANDS = {
+    1: {"name": "push", "short": "", "arg": "var", "in": "0", "out": "1"},
+    2: {"name": "pop", "short": "pop", "in": "1", "out": "0"},
+    3: {
+        "name": "popTo",
+        "short": "popTo",
+        "arg": "var",
+        "in": "0",
+        "out": "0",
+        # note in fact popTo takes one
+        # argument but it is not visible to the parser because popTo
+        # is always at the start of a function
+    },
+    8: {"name": "eq", "short": "==", "in": "2", "out": "1"},
+    9: {"name": "neq", "short": "!=", "in": "2", "out": "1"},
+    10: {"name": "gt", "short": ">", "in": "2", "out": "1"},
+    11: {"name": "gte", "short": ">=", "in": "2", "out": "1"},
+    12: {"name": "lt", "short": "<", "in": "2", "out": "1"},
+    13: {"name": "lte", "short": "<=", "in": "2", "out": "1"},
+
+    16: {"name": "jumpIf", "short": "if", "arg": "line", "in": "1", "out": "0"},
+    17: {"name": "jumpIfNot", "arg": "line", "in": "1", "out": "0"},
+    18: {"name": "jump", "arg": "line", "in": "0", "out": "0"},
+
+    # 24: {"name": "call", "arg": "objFunc", "in": "0", "out": "1"},
+    24: {"name": "apiCall", "arg": "objFunc", "in": "0", "out": "1"},
+    # 25: {"name": "callGlobal", "arg": "func", "in": "0", "out": "1"},
+    25: {"name": "userfuncCall", "arg": "func", "in": "0", "out": "1"},
+
+    33: {
+        "name": "ret",
+        "short": "return",
+        "in": "1",
+        "out": "0",  # note: we claim that return
+        # pops one argument from the stack, which is not the full truth.
+    },
+
+    40: {"name": "complete", "short": "complete", "in": "0", "out": "0"},
+
+    48: {"name": "mov", "short": "=", "in": "2", "out": "1"},
+
+    56: {"name": "postinc", "short": "++", "post": 1, "in": "1", "out": "1"},
+    57: {"name": "postdec", "short": "--", "post": 1, "in": "1", "out": "1"},
+    58: {"name": "preinc", "short": "++", "in": "1", "out": "1"},
+    59: {"name": "predec", "short": "--", "in": "1", "out": "1"},
+
+    64: {"name": "add", "short": "+", "in": "2", "out": "1"},
+    65: {"name": "sub", "short": "-", "in": "2", "out": "1"},
+    66: {"name": "mul", "short": "*", "in": "2", "out": "1"},
+    67: {"name": "div", "short": "/", "in": "2", "out": "1"},
+    68: {"name": "mod", "short": "%", "in": "2", "out": "1"},
+
+    72: {"name": "and", "short": "&", "in": "2", "out": "1"},
+    73: {"name": "or", "short": "|", "in": "2", "out": "1"},
+    74: {"name": "not", "short": "!", "in": "1", "out": "1"},
+    76: {"name": "negative", "short": "-", "in": "1", "out": "1"},
+
+    80: {"name": "logAnd", "short": "&&", "in": "2", "out": "1"},
+    81: {"name": "logOr", "short": "||", "in": "2", "out": "1"},
+
+    # The decompiler has these next two as 90 and 91.
+    88: {"name": "lshift", "short": "<<", "in": "2", "out": "1"},
+    89: {"name": "rshift", "short": ">>", "in": "2", "out": "1"},
+
+    90: {"name": "lshift", "short": "<<", "in": "2", "out": "1"},
+    91: {"name": "rshift", "short": ">>", "in": "2", "out": "1"},
+
+    96: {"name": "new", "arg": "obj", "in": "0", "out": "1"},
+    97: {"name": "delete", "short": "delete", "in": "1", "out": "1"},
+
+    112: {"name": "strangeCall", "bytes": 6, "arg": "objFunc", "in": "0", "out": "1"},
+    # 112: {"name": "apiCall", "arg": "objFunc", "in": "0", "out": "1"},
+
+    # Mystery opcode
+    # "255": {"name": "MYSTERY", "short": "WAT", "in": "0", "out": "0"},
+
+    300: {"name": "blockStart", "short": "{", "in": "0", "out": "0"},
+
+    301: {"name": "blockEnd", "short": "}", "in": "0", "out": "0"},
+}
+
+PRIMITIVE_TYPES = {
+    5: "BOOLEAN",
+    2: "INT",
+    3: "FLOAT",
+    4: "DOUBLE",
+    6: "STRING",
+}
+
+class Command(TypedDict):
+    opcode: int
+    arg: int
+
+class Method(TypedDict):
+    name: str
+    typeOffset: int
+    returnType: str
+
+class Variable(TypedDict):
+    type: str
+    value: Union[int, float, str, None]
+    global_: int
+    guid: Optional[str]
+    isClass: Optional[bool]
+    members: Optional[List[int]]
+    events: Optional[List[int]]
+
+class Binding(TypedDict):
+    commandOffset: int
+    methodOffset: int
+    variableOffset: int
+    binaryOffset: int
+
+class ParsedMaki(TypedDict):
+    commands: List[Command]
+    methods: List[Method]
+    variables: List[Variable]
+    classes: List[str]
+    bindings: List[Binding]
+    version: int
+    maki_id: str
+
+class MakiFile0:
+    def __init__(self, data: bytes):
+        self.data = data
+        self.position = 0
+
+    def readUint32LE(self) -> int:
+        value = int.from_bytes(self.data[self.position:self.position+4], 'little')
+        self.position += 4
+        return value
+
+    def readUint16LE(self) -> int:
+        value = int.from_bytes(self.data[self.position:self.position+2], 'little')
+        self.position += 2
+        return value
+
+    def readUint8(self) -> int:
+        value = self.data[self.position]
+        self.position += 1
+        return value
+
+    def readString(self) -> str:
+        length = self.readUint32LE()
+        string = self.data[self.position:self.position+length].decode('utf-8')
+        self.position += length
+        return string
+
+    def readStringOfLength(self, length: int) -> str:
+        string = self.data[self.position:self.position+length].decode('utf-8')
+        self.position += length
+        return string
+
+    def getPosition(self) -> int:
+        return self.position
+
+    def isEof(self) -> bool:
+        return self.position >= len(self.data)
+
+    def peekUInt32LE(self) -> int:
+        return int.from_bytes(self.data[self.position:self.position+4], 'little')
+
+def parse(data: bytes, maki_id: str=None) -> ParsedMaki:
+    makiFile = MakiFile(data)
+
+    # magic = readMagic(makiFile)
+    # version = readVersion(makiFile)
+    # extraVersion = makiFile.readUint32LE()
+    makiFile.skip(8)
+
+    classes = readClasses(makiFile)
+    # count = makiFile.readUint32LE()
+    # makiFile.skip(8 *16)
+
+    methods = readMethods(makiFile, classes)
+
+    variables = readVariables(makiFile, classes)
+    readConstants(makiFile, variables)
+    bindings = readBindings(makiFile, variables)
+
+    commands = decodeCode(makiFile)
+
+    if not makiFile.isEof():
+        print("Warning: EOF not reached!")
+
+    offsetToCommand = {}
+    for i, command in enumerate(commands):
+        if "offset" in command:
+            offsetToCommand[command["offset"]] = i
+
+    resolvedBindings = []
+    # for binding in bindings:
+    #     resolvedBindings.append({
+    #         **binding,
+    #         "commandOffset": offsetToCommand.get(binding["binaryOffset"],
+    #     })
+
+    resolvedCommands = []
+    for command in commands:
+        if command.get("argType") == "COMMAND_OFFSET":
+            resolvedCommands.append({
+                **command,
+                "arg": offsetToCommand.get(command["arg"]),
+            })
+        else:
+            resolvedCommands.append(command)
+
+    return {
+        "classes": classes,
+        "methods": methods,
+        "variables": variables,
+        "bindings": resolvedBindings,
+        "commands": resolvedCommands,
+        # "version": version,
+        "maki_id": maki_id,
+    }
+
+def readMagic(makiFile: MakiFile) -> str:
+    magic = makiFile.readStringOfLength(len(MAGIC))
+    if magic != MAGIC:
+        raise ValueError(f"Magic '{magic}' does not match '{MAGIC}'. Is this a maki file?")
+    return magic
+
+def readVersion(makiFile: MakiFile) -> int:
+    return makiFile.readUint16LE()
+
+def readClasses(makiFile: MakiFile) -> List[str]:
+    count = makiFile.readUint32LE()
+    classes = []
+    for _ in range(count):
+        identifier = ""
+        for _ in range(4):
+            identifier += f"{makiFile.readUint32LE():08x}"
+        classes.append(identifier)
+    return classes
+
+def readMethods(makiFile: MakiFile, classes: List[str]) -> List[Method]:
+    count = makiFile.readUint32LE()
+    methods = []
+    for _ in range(count):
+        classCode = makiFile.readUint16LE()
+        typeOffset = classCode & 0xff
+        makiFile.readUint16LE()  # Skip the next 2 bytes
+        name = makiFile.readString().lower()
+        # print('m.' , name)
+        className = classes[typeOffset]
+        returnType = getReturnType(className, name)
+        methods.append({
+            "name": name,
+            "typeOffset": typeOffset,
+            "returnType": returnType,
+        })
+    return methods
+
+def readVariables(makiFile: MakiFile, classes: List[str]) -> List[Variable]:
+    count = makiFile.readUint32LE()
+    variables = []
+    for _ in range(count):
+        typeOffset = makiFile.readUint8()
+        object = makiFile.readUint8()
+        subClass = makiFile.readUint16LE()
+        uinit1 = makiFile.readUint16LE()
+        uinit2 = makiFile.readUint16LE()
+        makiFile.readUint16LE()  # uinit3
+        makiFile.readUint16LE()  # uinit4
+        global_var = makiFile.readUint8()
+        makiFile.readUint8()  # system
+
+        if subClass:
+            variable = variables[typeOffset]
+            if variable is None:
+                raise ValueError("Invalid type")
+            else:
+                if "members" not in variable:
+                    variable["isClass"] = True
+                    variable["members"] = []
+                    variable["events"] = []
+            variables.append({
+                "type": "OBJECT",
+                "value": None,
+                "global": global_var,
+                "guid": variable["guid"],
+            })
+            index = len(variables) - 1
+            if index not in variable["members"]:
+                variable["members"].append(index)
+        elif object:
+            klass = classes[typeOffset]
+            if klass is None:
+                raise ValueError("Invalid type")
+            variables.append({
+                "type": "OBJECT",
+                "value": None,
+                "global": global_var,
+                "guid": klass,
+            })
+        else:
+            typeName = PRIMITIVE_TYPES.get(typeOffset)
+            if typeName is None:
+                raise ValueError("Invalid type")
+            value = None
+            if typeName == PRIMITIVE_TYPES[5]:
+                value = uinit1
+                assert value in [0, 1], "Expected boolean value to be initialized as zero or one"
+            elif typeName == PRIMITIVE_TYPES[2]:
+                value = uinit1
+            elif typeName in [PRIMITIVE_TYPES[3], PRIMITIVE_TYPES[4]]:
+                exponent = (uinit2 & 0xff80) >> 7
+                # mantisse = ((0x80 | (uinit2 & 0x7f)) << 16 | uinit1
+                # value = mantisse * 2.0 ** (exponent - 0x96)
+            elif typeName == PRIMITIVE_TYPES[6]:
+                pass  # Will be set by constants later
+            else:
+                raise ValueError("Invalid primitive type")
+            variables.append({
+                "global": global_var,
+                "type": typeName,
+                "value": value,
+            })
+    return variables
+
+def readConstants(makiFile: MakiFile, variables: List[Variable]):
+    count = makiFile.readUint32LE()
+    for _ in range(count):
+        i = makiFile.readUint32LE()
+        variable = variables[i]
+        value = makiFile.readString()
+        variable["value"] = value
+
+def readBindings(makiFile: MakiFile, variables: List[Variable]) -> List[Binding]:
+    count = makiFile.readUint32LE()
+    bindings = []
+    for _ in range(count):
+        variableOffset = makiFile.readUint32LE()
+        methodOffset = makiFile.readUint32LE()
+        binaryOffset = makiFile.readUint32LE()
+        bindings.append({
+            "variableOffset": variableOffset,
+            "methodOffset": methodOffset,
+            "binaryOffset": binaryOffset,
+        })
+        aclass = variables[variableOffset]
+        if "events" not in aclass:
+            aclass["events"] = []
+        aclass["events"].append(len(bindings) - 1)
+    return bindings
+
+def decodeCode(makiFile: MakiFile) -> List[Command]:
+    length = makiFile.readUint32LE()
+    start = makiFile.getPosition()
+    commands = []
+    while makiFile.getPosition() < start + length:
+        commands.append(parseCommand(makiFile, start, length))
+    return commands
+
+def parseCommand(makiFile: MakiFile, start: int, length: int) -> Command:
+    pos = makiFile.getPosition() - start
+    opcode = makiFile.readUint8()
+    command = {
+        "offset": pos,
+        "start": start,
+        "opcode": opcode,
+        "arg": None,
+        "argType": opcodeToArgType(opcode),
+        "ir": COMMANDS[opcode]['name'],
+    }
+
+    if command["argType"] == "NONE":
+        return command
+
+    arg = None
+    if command["argType"] == "COMMAND_OFFSET":
+        arg = makiFile.readInt32LE() + 5 + pos
+    elif command["argType"] == "VARIABLE_OFFSET":
+        arg = makiFile.readUint32LE()
+    else:
+        raise ValueError("Invalid argType")
+
+    command["arg"] = arg
+
+    # if length > pos + 5 + 4 and 0xffff0000 <= makiFile.peekUInt32LE() <= 0xffff000f:
+    #     makiFile.readUint32LE()
+
+    if opcode == 112:  # strangeCall
+        makiFile.readUint8()
+
+    return command
+
+def opcodeToArgType(opcode: int) -> str:
+    # TODO: Implement COMMANDS mapping
+    command = COMMANDS.get(opcode)
+    if command is None:
+        raise ValueError(f"Unknown opcode {opcode}")
+
+    if command.get("arg") in ["func", "line"]:
+        return "COMMAND_OFFSET"
+    elif command.get("arg") in ["var", "objFunc", "obj"]:
+        return "VARIABLE_OFFSET"
+    else:
+        return "NONE"
+
+def getReturnType(className: str, name: str) -> str:
+    # TODO: Implement this function based on your logic
+    return "UNKNOWN"
+
+if __name__ == '__main__':
+    # p = parse('skins/raw/samples/basicTests.maki')
+    # p = parse('skins/extracted/c/cd/cd-FALCON/scripts/controls.maki')
+    p = parse('skins/extracted/1/12/12/scripts/scustom.maki')
+    # print(p)
+    # print(p.keys())
+    # print(p['commands'])
+    for cmd in p['commands']:
+        print(cmd['ir'].upper(), cmd['arg'])
