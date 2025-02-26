@@ -1,3 +1,5 @@
+import { downloaSkins, SkinPath } from "./skins"
+
 export function setupCounter(element: HTMLButtonElement) {
     let amount = 0
     const setCounter = (count: number) => {
@@ -5,8 +7,9 @@ export function setupCounter(element: HTMLButtonElement) {
         element.innerHTML = `loading ${amount} skins`
     }
     // element.addEventListener('click', () => setCounter(amount))
-    element.addEventListener('click', () => {
-        const skins = loadSkins(10);
+    element.addEventListener('click', async () => {
+        const skins = await loadSkins(10);
+        downloaSkins(skins)
     })
     setCounter(10)
 }
@@ -15,7 +18,7 @@ function gql(strings: TemplateStringsArray): string {
     return strings[0];
 }
 
-async function loadSkins(amount: number) {
+async function loadSkins(amount: number):Promise<SkinPath[]> {
     const query = `
       query {
         modern_skins(first: ${amount}) {
@@ -48,4 +51,5 @@ async function loadSkins(amount: number) {
     }
 
     console.log(bankskin1)
+    return bankskin1 as SkinPath[]
 }
