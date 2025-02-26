@@ -8,10 +8,10 @@ export function setupCounter(element: HTMLButtonElement) {
     }
     // element.addEventListener('click', () => setCounter(amount))
     element.addEventListener('click', async () => {
-        const skins = await loadSkins(10);
+        const skins = await loadSkins(amount);
         downloaSkins(skins)
     })
-    setCounter(10)
+    setCounter(100)
 }
 
 function gql(strings: TemplateStringsArray): string {

@@ -17,13 +17,13 @@ async function downloaSkin(skin: SkinPath):Promise<boolean>{
     const skinZipBlob = await response.blob();
     const zip = await JSZip.loadAsync(skinZipBlob);
 
-    const pattern = /\.m/; // Ganti dengan pattern yang Anda cari
+    const pattern = /\.[mM]$/; // Ganti dengan pattern yang Anda cari
 
     // Cek apakah file dengan pattern tertentu ada
     const files = zip.file(pattern);
 
-    if (files) {
-        console.log(filename, 'File ditemukan:', files.length);
+    if (files && files.length > 0) {
+        console.log(filename, 'File ditemukan:', files.length, files);
         fetch("/res/add", {
             method: "POST",
             body: JSON.stringify({
