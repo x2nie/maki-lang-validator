@@ -17,7 +17,7 @@ by run the maki compiler (`mc.exe`) with those syntax.
 | <<= | ✅ | `x <<= y;` | `x = x << y;`  | [lt-lt-eq.m](validator/res/assignment/lt-lt-eq.m#L15)  |
 | >>= | ✅ | `x >>= y;` | `x = x >> y;`  | [gt-gt-eq.m](validator/res/assignment/gt-gt-eq.m#L15)  |
 | &= | ✅ | `x &= y;` | `x = x & y;`  | [amp-eq.m](validator/res/assignment/amp-eq.m#L15) |
-| &VerticalLine;= | ✅ | `x \|= y;` | `x = x \| y;`  | [vbar-eq.m](validator/res/assignment/vbar-eq.m#L15) |
+| \|= | ✅ | `x \|= y;` | `x = x \| y;`  | [vbar-eq.m](validator/res/assignment/vbar-eq.m#L15) |
 | ~= | ❌ | `x ~= y;` | `x = x ~ y;`  | [tilde-eq.m](validator/res/assignment/tilde-eq.m#L15) |
 | = ~ | ❌ | `x = ~y;` | `x = x =~y;`  | [eq-tilde.m](validator/res/assignment/eq-tilde.m#L15) |
 | !=  | ✅ | `{ x != y; }` | `x = x ! y;`  | [mark-eq.m](validator/res/assignment/mark-eq.m#L15) |
