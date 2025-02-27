@@ -70,7 +70,7 @@ if 1: #? Binaray
         name = get_name(op)
         # print(name)
 
-        for type in ['int', 'float', 'double', 'string']:
+        for type in ['int', 'float', 'double', 'boolean', 'string']:
 
             stat = f"x = x {op} y;"
             print(f"| {op} | ✅ | `{stat}` |")
