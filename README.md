@@ -5,10 +5,10 @@ This project is an atempt to validate whether known syntax is already support or
 by run the maki compiler (`mc.exe`) with those syntax.
 
 ## Assignments
-| Operator | Supported | Sample syntax | Equivalent |
-| :------: | :-------: | ------------- | ---------- |
-| =  | ✅ | `x = y;`  | `x = y;`   |
-| += | ✅ | `x += y;` | `x = x + y;`  |
+| Operator | Supported | Usage | Equivalent | Code |
+| :------: | :-------: | ----- | ---------- | ---- |
+| =  | ✅ | `x = y;`  | `x = y;`        | [eq.m](res/assignment/eq.m) |
+| += | ✅ | `x += y;` | `x = x + y;`    |
 | -= | ✅ | `x -= y;` | `x = x - y;`  |
 | /= | ✅ | `x /= y;` | `x = x / y;`  |
 | *= | ✅ | `x *= y;` | `x = x * y;`  |
