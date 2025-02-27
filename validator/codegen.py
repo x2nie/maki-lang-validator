@@ -64,7 +64,7 @@ if 0:
 
         compile(mpath)
         # break
-if 1: #? Binaray
+if 1: #? Binary
     operators = "+ - * / % && || == != << >> <<< >>>".split(' ')
     for op in operators:
         name = get_name(op)
