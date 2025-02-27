@@ -7,7 +7,7 @@ by run the maki compiler (`mc.exe`) with those syntax.
 ## Assignments
 | Operator | Supported | Usage | Equivalent | Code |
 | :------: | :-------: | ----- | ---------- | ---- |
-| =  | ✅ | `x = y;`  | `x = y;`        | [eq.m](res/assignment/eq.m) |
+| =  | ✅ | `x = y;`  | `x = y;`        | [eq.m](validator/res/assignment/eq.m) |
 | += | ✅ | `x += y;` | `x = x + y;`    |
 | -= | ✅ | `x -= y;` | `x = x - y;`  |
 | /= | ✅ | `x /= y;` | `x = x / y;`  |
