@@ -131,7 +131,7 @@ by run the maki compiler (`mc.exe`) with those syntax.
 
 ## Unary operation
 
-<details>
+<details open>
 <summary>Int</summary>
 
 | Operator | Name | Compiled | Usage |  Code |
@@ -139,10 +139,10 @@ by run the maki compiler (`mc.exe`) with those syntax.
 | !y | Not | ✅ | `x = !y;` | [int/mark.m](validator/res/unary/int/mark.m#L15) |
 | ~y | Bits Not | ❌ | `x = ~y;` | [int/tilde.m](validator/res/unary/int/tilde.m#L15) |
 | -y | Negative | ✅ | `x = -y;` | [int/minus.m](validator/res/unary/int/minus.m#L15) |
-| y++ | postinc | ✅ | `x = y++;` | [int/postinc.m](validator/res/unary/int/postinc.m#L15) |
-| y-- | postdec | ✅ | `x = y--;` | [int/postdec.m](validator/res/unary/int/postdec.m#L15) |
-| ++y | preinc | ✅ | `x = ++y;` | [int/preinc.m](validator/res/unary/int/preinc.m#L15) |
-| --y | predec | ❌ | `x = --y;` | [int/predec.m](validator/res/unary/int/predec.m#L15) |
+| y++ | Post Increment | ✅ | `x = y++;` | [int/postinc.m](validator/res/unary/int/postinc.m#L15) |
+| y-- | Post decrement | ✅ | `x = y--;` | [int/postdec.m](validator/res/unary/int/postdec.m#L15) |
+| ++y | Pre Increment | ✅ | `x = ++y;` | [int/preinc.m](validator/res/unary/int/preinc.m#L15) |
+| --y | Pre decrement | ❌ | `x = --y;` | [int/predec.m](validator/res/unary/int/predec.m#L15) |
 </details>
 
 <details>
@@ -153,10 +153,10 @@ by run the maki compiler (`mc.exe`) with those syntax.
 | !y | Not | ✅ | `x = !y;` | [float/mark.m](validator/res/unary/float/mark.m#L15) |
 | ~y | Bits Not | ❌ | `x = ~y;` | [float/tilde.m](validator/res/unary/float/tilde.m#L15) |
 | -y | Negative | ✅ | `x = -y;` | [float/minus.m](validator/res/unary/float/minus.m#L15) |
-| y++ | postinc | ✅ | `x = y++;` | [float/postinc.m](validator/res/unary/float/postinc.m#L15) |
-| y-- | postdec | ✅ | `x = y--;` | [float/postdec.m](validator/res/unary/float/postdec.m#L15) |
-| ++y | preinc | ✅ | `x = ++y;` | [float/preinc.m](validator/res/unary/float/preinc.m#L15) |
-| --y | predec | ❌ | `x = --y;` | [float/predec.m](validator/res/unary/float/predec.m#L15) |
+| y++ | Post Increment | ✅ | `x = y++;` | [float/postinc.m](validator/res/unary/float/postinc.m#L15) |
+| y-- | Post decrement | ✅ | `x = y--;` | [float/postdec.m](validator/res/unary/float/postdec.m#L15) |
+| ++y | Pre Increment | ✅ | `x = ++y;` | [float/preinc.m](validator/res/unary/float/preinc.m#L15) |
+| --y | Pre decrement | ❌ | `x = --y;` | [float/predec.m](validator/res/unary/float/predec.m#L15) |
 </details>
 
 <details>
@@ -167,10 +167,10 @@ by run the maki compiler (`mc.exe`) with those syntax.
 | !y | Not | ✅ | `x = !y;` | [double/mark.m](validator/res/unary/double/mark.m#L15) |
 | ~y | Bits Not | ❌ | `x = ~y;` | [double/tilde.m](validator/res/unary/double/tilde.m#L15) |
 | -y | Negative | ✅ | `x = -y;` | [double/minus.m](validator/res/unary/double/minus.m#L15) |
-| y++ | postinc | ✅ | `x = y++;` | [double/postinc.m](validator/res/unary/double/postinc.m#L15) |
-| y-- | postdec | ✅ | `x = y--;` | [double/postdec.m](validator/res/unary/double/postdec.m#L15) |
-| ++y | preinc | ✅ | `x = ++y;` | [double/preinc.m](validator/res/unary/double/preinc.m#L15) |
-| --y | predec | ❌ | `x = --y;` | [double/predec.m](validator/res/unary/double/predec.m#L15) |
+| y++ | Post Increment | ✅ | `x = y++;` | [double/postinc.m](validator/res/unary/double/postinc.m#L15) |
+| y-- | Post decrement | ✅ | `x = y--;` | [double/postdec.m](validator/res/unary/double/postdec.m#L15) |
+| ++y | Pre Increment | ✅ | `x = ++y;` | [double/preinc.m](validator/res/unary/double/preinc.m#L15) |
+| --y | Pre decrement | ❌ | `x = --y;` | [double/predec.m](validator/res/unary/double/predec.m#L15) |
 </details>
 
 <details>
@@ -181,10 +181,10 @@ by run the maki compiler (`mc.exe`) with those syntax.
 | !y | Not | ❌ | `x = !y;` | [string/mark.m](validator/res/unary/string/mark.m#L15) |
 | ~y | Bits Not | ❌ | `x = ~y;` | [string/tilde.m](validator/res/unary/string/tilde.m#L15) |
 | -y | Negative | ✅ | `x = -y;` | [string/minus.m](validator/res/unary/string/minus.m#L15) |
-| y++ | postinc | ❌ | `x = y++;` | [string/postinc.m](validator/res/unary/string/postinc.m#L15) |
-| y-- | postdec | ❌ | `x = y--;` | [string/postdec.m](validator/res/unary/string/postdec.m#L15) |
-| ++y | preinc | ❌ | `x = ++y;` | [string/preinc.m](validator/res/unary/string/preinc.m#L15) |
-| --y | predec | ❌ | `x = --y;` | [string/predec.m](validator/res/unary/string/predec.m#L15) |
+| y++ | Post Increment | ❌ | `x = y++;` | [string/postinc.m](validator/res/unary/string/postinc.m#L15) |
+| y-- | Post decrement | ❌ | `x = y--;` | [string/postdec.m](validator/res/unary/string/postdec.m#L15) |
+| ++y | Pre Increment | ❌ | `x = ++y;` | [string/preinc.m](validator/res/unary/string/preinc.m#L15) |
+| --y | Pre decrement | ❌ | `x = --y;` | [string/predec.m](validator/res/unary/string/predec.m#L15) |
 </details>
 
 <details>
@@ -195,8 +195,8 @@ by run the maki compiler (`mc.exe`) with those syntax.
 | !y | Not | ✅ | `x = !y;` | [boolean/mark.m](validator/res/unary/boolean/mark.m#L15) |
 | ~y | Bits Not | ❌ | `x = ~y;` | [boolean/tilde.m](validator/res/unary/boolean/tilde.m#L15) |
 | -y | Negative | ✅ | `x = -y;` | [boolean/minus.m](validator/res/unary/boolean/minus.m#L15) |
-| y++ | postinc | ✅ | `x = y++;` | [boolean/postinc.m](validator/res/unary/boolean/postinc.m#L15) |
-| y-- | postdec | ✅ | `x = y--;` | [boolean/postdec.m](validator/res/unary/boolean/postdec.m#L15) |
-| ++y | preinc | ✅ | `x = ++y;` | [boolean/preinc.m](validator/res/unary/boolean/preinc.m#L15) |
-| --y | predec | ❌ | `x = --y;` | [boolean/predec.m](validator/res/unary/boolean/predec.m#L15) |
+| y++ | Post Increment | ✅ | `x = y++;` | [boolean/postinc.m](validator/res/unary/boolean/postinc.m#L15) |
+| y-- | Post decrement | ✅ | `x = y--;` | [boolean/postdec.m](validator/res/unary/boolean/postdec.m#L15) |
+| ++y | Pre Increment | ✅ | `x = ++y;` | [boolean/preinc.m](validator/res/unary/boolean/preinc.m#L15) |
+| --y | Pre decrement | ❌ | `x = --y;` | [boolean/predec.m](validator/res/unary/boolean/predec.m#L15) |
 </details>
