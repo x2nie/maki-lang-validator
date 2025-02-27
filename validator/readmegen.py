@@ -32,7 +32,7 @@ if 1:
             op += SYMBOL[part]
             
         status = '✅' if compiled else '❌'
-        row = f"| {op} | {status} | `x = x {op} y;` | [{file}]({pathfile}#L15) |"
+        row = f"| {op} | {status} | `x = x {op} y;` | [{type}/{file}]({pathfile}#L15) |"
         print(row)
         typs[type].append(row)
 
