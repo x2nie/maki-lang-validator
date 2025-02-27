@@ -369,7 +369,7 @@ def parseCommand(makiFile: MakiFile, start: int, length: int) -> Command:
         "offset": pos,
         "start": start,
         "opcode": opcode,
-        "arg": None,
+        "arg": '',
         "argType": opcodeToArgType(opcode),
         "ir": COMMANDS[opcode]['name'],
     }
@@ -385,6 +385,8 @@ def parseCommand(makiFile: MakiFile, start: int, length: int) -> Command:
     else:
         raise ValueError("Invalid argType")
 
+    if arg is None:
+        arg = '' #it is python.
     command["arg"] = arg
 
     # if length > pos + 5 + 4 and 0xffff0000 <= makiFile.peekUInt32LE() <= 0xffff000f:

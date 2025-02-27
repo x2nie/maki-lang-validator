@@ -18,7 +18,7 @@ NAMES = {
     '>': 'gt',
     '^': 'caret',
     '~': 'tilde',
-    '|': 'vbar',
+    '|': 'pipe',
     '!': 'mark',
 }
 def get_name(symbols):
@@ -48,7 +48,7 @@ coding(int x, int y)
 }
 '''
 
-if 1:
+if 0:
     assignments = "*= /= %= += -= <<= >>= &= |= ^= = ~= !=".split(' ')
     for op in assignments:
         name = get_name(op)
@@ -64,3 +64,28 @@ if 1:
 
         compile(mpath)
         # break
+if 1: #? Binaray
+    operators = "+ - * / % && || == != << >> <<< >>>".split(' ')
+    for op in operators:
+        name = get_name(op)
+        # print(name)
+
+        for type in ['int', 'float', 'double', 'string']:
+
+            stat = f"x = x {op} y;"
+            print(f"| {op} | ✅ | `{stat}` |")
+            # print(tpl % stat)
+
+            mpath = f'res/binary/{type}/{name}.m'
+            os.makedirs(os.path.dirname(mpath), exist_ok=True)
+
+            with open(mpath, 'w') as f:
+                content = tpl % stat
+                content = content.replace('int', type)
+                f.write(content)
+
+            compile(mpath)
+        # break
+
+if 0: #? Unary
+    operators = "! ~ -".split(' ')

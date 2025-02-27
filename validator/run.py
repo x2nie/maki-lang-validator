@@ -8,7 +8,8 @@ exe_dir = os.path.join(CURDIR, 'mc')
 
 def compile(mfile):
     mfile = os.path.abspath(mfile)
-    outdir = os.path.dirname(mfile)
+    # outdir = os.path.dirname(mfile)
+    outdir,filename = os.path.split(mfile)
     # os.chdir(outdir)
 
     # Perintah yang ingin dijalankan
@@ -19,7 +20,7 @@ def compile(mfile):
     result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, text=True)
 
     # Menyimpan hasil eksekusi ke dalam file
-    with open(os.path.join(outdir, "log.txt"), "w") as file:
+    with open(os.path.join(outdir, f"{filename[:-2]}.log"), "w") as file:
         file.write(result.stdout or result.stderr)
 
     #? move the compiled maki into the source-code's folder
