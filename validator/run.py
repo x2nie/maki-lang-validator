@@ -21,7 +21,7 @@ def compile(mfile):
 
     # Menyimpan hasil eksekusi ke dalam file
     with open(os.path.join(outdir, f"{filename[:-2]}.log"), "w") as file:
-        file.write(result.stdout or result.stderr)
+        file.write(result.stdout or result.stderr or '')
 
     #? move the compiled maki into the source-code's folder
     makifilepath = f'{mfile}aki' 
