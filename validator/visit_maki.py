@@ -16,12 +16,13 @@ def find_files_with_extension(directory, extension='.maki'):
                 matched_files.append(full_path)
     return matched_files
 
-# Example usage
-output_folder = 'validator/skins/extracted'  # Folder where the extracted files are located
-extension = '.maki'  # File extension to search for
 
 
 if __name__ == '__main__':
+    # Example usage
+    output_folder = 'validator/skins/extracted'  # Folder where the extracted files are located
+    output_folder = 'validator/res/binary'  # Folder where the extracted files are located
+    extension = '.maki'  # File extension to search for
     # Find all .maki files in the output folder
     maki_files = find_files_with_extension(output_folder, extension)
 
