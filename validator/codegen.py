@@ -74,8 +74,8 @@ if 0:
 
         compile(mpath)
         # break
-if 0: #? Binary
-    operators = "+ - * / % && || == != << >> <<< >>>".split(' ')
+if 1: #? Binary
+    operators = "+ - * / % ^ ~ & | && || == != << >> <<< >>>".split(' ')
     for op in operators:
         name = get_name(op)
         # print(name)
@@ -97,7 +97,7 @@ if 0: #? Binary
             compile(mpath)
         # break
 
-if 1: #? Unary
+if 0: #? Unary
     operators = "!y ~y -y y++ y-- ++y --y".split(' ')
     for expression in operators:
         name = get_name(expression)
