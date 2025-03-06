@@ -39,6 +39,9 @@ by run the maki compiler (`mc.exe`) with those syntax.
 | * | ✅ | `x = x * y;` | [int/star.m](validator/res/binary/int/star.m#L15) |
 | / | ✅ | `x = x / y;` | [int/slash.m](validator/res/binary/int/slash.m#L15) |
 | % | ✅ | `x = x % y;` | [int/precent.m](validator/res/binary/int/precent.m#L15) |
+| ^ | ❌ | `x = x ^ y;` | [int/caret.m](validator/res/binary/int/caret.m#L15) |
+| ~ | ❌ | `x = x ~ y;` | [int/tilde.m](validator/res/binary/int/tilde.m#L15) |
+| & | ✅ | `x = x & y;` | [int/amp.m](validator/res/binary/int/amp.m#L15) |
 | && | ✅ | `x = x && y;` | [int/amp-amp.m](validator/res/binary/int/amp-amp.m#L15) |
 | == | ✅ | `x = x == y;` | [int/eq-eq.m](validator/res/binary/int/eq-eq.m#L15) |
 | != | ✅ | `x = x != y;` | [int/mark-eq.m](validator/res/binary/int/mark-eq.m#L15) |
@@ -47,6 +50,7 @@ by run the maki compiler (`mc.exe`) with those syntax.
 | <<< | ❌ | `x = x <<< y;` | [int/lt-lt-lt.m](validator/res/binary/int/lt-lt-lt.m#L15) |
 | >>> | ❌ | `x = x >>> y;` | [int/gt-gt-gt.m](validator/res/binary/int/gt-gt-gt.m#L15) |
 | \|\| | ✅ | `x = x \|\| y;` | [int/pipe-pipe.m](validator/res/binary/int/pipe-pipe.m#L15) |
+| \| | ✅ | `x = x \| y;` | [int/pipe.m](validator/res/binary/int/pipe.m#L15) |
 </details>
 
 <details>
@@ -59,6 +63,9 @@ by run the maki compiler (`mc.exe`) with those syntax.
 | * | ✅ | `x = x * y;` | [float/star.m](validator/res/binary/float/star.m#L15) |
 | / | ✅ | `x = x / y;` | [float/slash.m](validator/res/binary/float/slash.m#L15) |
 | % | ❌ | `x = x % y;` | [float/precent.m](validator/res/binary/float/precent.m#L15) |
+| ^ | ❌ | `x = x ^ y;` | [float/caret.m](validator/res/binary/float/caret.m#L15) |
+| ~ | ❌ | `x = x ~ y;` | [float/tilde.m](validator/res/binary/float/tilde.m#L15) |
+| & | ❌ | `x = x & y;` | [float/amp.m](validator/res/binary/float/amp.m#L15) |
 | && | ✅ | `x = x && y;` | [float/amp-amp.m](validator/res/binary/float/amp-amp.m#L15) |
 | == | ✅ | `x = x == y;` | [float/eq-eq.m](validator/res/binary/float/eq-eq.m#L15) |
 | != | ✅ | `x = x != y;` | [float/mark-eq.m](validator/res/binary/float/mark-eq.m#L15) |
@@ -67,6 +74,7 @@ by run the maki compiler (`mc.exe`) with those syntax.
 | <<< | ❌ | `x = x <<< y;` | [float/lt-lt-lt.m](validator/res/binary/float/lt-lt-lt.m#L15) |
 | >>> | ❌ | `x = x >>> y;` | [float/gt-gt-gt.m](validator/res/binary/float/gt-gt-gt.m#L15) |
 | \|\| | ✅ | `x = x \|\| y;` | [float/pipe-pipe.m](validator/res/binary/float/pipe-pipe.m#L15) |
+| \| | ❌ | `x = x \| y;` | [float/pipe.m](validator/res/binary/float/pipe.m#L15) |
 </details>
 
 <details>
@@ -79,6 +87,9 @@ by run the maki compiler (`mc.exe`) with those syntax.
 | * | ✅ | `x = x * y;` | [double/star.m](validator/res/binary/double/star.m#L15) |
 | / | ✅ | `x = x / y;` | [double/slash.m](validator/res/binary/double/slash.m#L15) |
 | % | ❌ | `x = x % y;` | [double/precent.m](validator/res/binary/double/precent.m#L15) |
+| ^ | ❌ | `x = x ^ y;` | [double/caret.m](validator/res/binary/double/caret.m#L15) |
+| ~ | ❌ | `x = x ~ y;` | [double/tilde.m](validator/res/binary/double/tilde.m#L15) |
+| & | ❌ | `x = x & y;` | [double/amp.m](validator/res/binary/double/amp.m#L15) |
 | && | ✅ | `x = x && y;` | [double/amp-amp.m](validator/res/binary/double/amp-amp.m#L15) |
 | == | ✅ | `x = x == y;` | [double/eq-eq.m](validator/res/binary/double/eq-eq.m#L15) |
 | != | ✅ | `x = x != y;` | [double/mark-eq.m](validator/res/binary/double/mark-eq.m#L15) |
@@ -87,6 +98,7 @@ by run the maki compiler (`mc.exe`) with those syntax.
 | <<< | ❌ | `x = x <<< y;` | [double/lt-lt-lt.m](validator/res/binary/double/lt-lt-lt.m#L15) |
 | >>> | ❌ | `x = x >>> y;` | [double/gt-gt-gt.m](validator/res/binary/double/gt-gt-gt.m#L15) |
 | \|\| | ✅ | `x = x \|\| y;` | [double/pipe-pipe.m](validator/res/binary/double/pipe-pipe.m#L15) |
+| \| | ❌ | `x = x \| y;` | [double/pipe.m](validator/res/binary/double/pipe.m#L15) |
 </details>
 
 <details>
@@ -99,6 +111,9 @@ by run the maki compiler (`mc.exe`) with those syntax.
 | * | ❌ | `x = x * y;` | [string/star.m](validator/res/binary/string/star.m#L15) |
 | / | ❌ | `x = x / y;` | [string/slash.m](validator/res/binary/string/slash.m#L15) |
 | % | ❌ | `x = x % y;` | [string/precent.m](validator/res/binary/string/precent.m#L15) |
+| ^ | ❌ | `x = x ^ y;` | [string/caret.m](validator/res/binary/string/caret.m#L15) |
+| ~ | ❌ | `x = x ~ y;` | [string/tilde.m](validator/res/binary/string/tilde.m#L15) |
+| & | ❌ | `x = x & y;` | [string/amp.m](validator/res/binary/string/amp.m#L15) |
 | && | ❌ | `x = x && y;` | [string/amp-amp.m](validator/res/binary/string/amp-amp.m#L15) |
 | == | ✅ | `x = x == y;` | [string/eq-eq.m](validator/res/binary/string/eq-eq.m#L15) |
 | != | ✅ | `x = x != y;` | [string/mark-eq.m](validator/res/binary/string/mark-eq.m#L15) |
@@ -107,6 +122,7 @@ by run the maki compiler (`mc.exe`) with those syntax.
 | <<< | ❌ | `x = x <<< y;` | [string/lt-lt-lt.m](validator/res/binary/string/lt-lt-lt.m#L15) |
 | >>> | ❌ | `x = x >>> y;` | [string/gt-gt-gt.m](validator/res/binary/string/gt-gt-gt.m#L15) |
 | \|\| | ❌ | `x = x \|\| y;` | [string/pipe-pipe.m](validator/res/binary/string/pipe-pipe.m#L15) |
+| \| | ❌ | `x = x \| y;` | [string/pipe.m](validator/res/binary/string/pipe.m#L15) |
 </details>
 
 <details>
@@ -119,6 +135,9 @@ by run the maki compiler (`mc.exe`) with those syntax.
 | * | ✅ | `x = x * y;` | [boolean/star.m](validator/res/binary/boolean/star.m#L15) |
 | / | ✅ | `x = x / y;` | [boolean/slash.m](validator/res/binary/boolean/slash.m#L15) |
 | % | ❌ | `x = x % y;` | [boolean/precent.m](validator/res/binary/boolean/precent.m#L15) |
+| ^ | ❌ | `x = x ^ y;` | [boolean/caret.m](validator/res/binary/boolean/caret.m#L15) |
+| ~ | ❌ | `x = x ~ y;` | [boolean/tilde.m](validator/res/binary/boolean/tilde.m#L15) |
+| & | ❌ | `x = x & y;` | [boolean/amp.m](validator/res/binary/boolean/amp.m#L15) |
 | && | ✅ | `x = x && y;` | [boolean/amp-amp.m](validator/res/binary/boolean/amp-amp.m#L15) |
 | == | ✅ | `x = x == y;` | [boolean/eq-eq.m](validator/res/binary/boolean/eq-eq.m#L15) |
 | != | ✅ | `x = x != y;` | [boolean/mark-eq.m](validator/res/binary/boolean/mark-eq.m#L15) |
@@ -127,7 +146,9 @@ by run the maki compiler (`mc.exe`) with those syntax.
 | <<< | ❌ | `x = x <<< y;` | [boolean/lt-lt-lt.m](validator/res/binary/boolean/lt-lt-lt.m#L15) |
 | >>> | ❌ | `x = x >>> y;` | [boolean/gt-gt-gt.m](validator/res/binary/boolean/gt-gt-gt.m#L15) |
 | \|\| | ✅ | `x = x \|\| y;` | [boolean/pipe-pipe.m](validator/res/binary/boolean/pipe-pipe.m#L15) |
+| \| | ❌ | `x = x \| y;` | [boolean/pipe.m](validator/res/binary/boolean/pipe.m#L15) |
 </details>
+
 
 ## Unary operation
 

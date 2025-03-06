@@ -21,7 +21,7 @@ SYMBOL = {
     'predec': '--y',
 }
 
-if 0: #* binary
+if 1: #* binary
     typs = {'int':[], 'float':[], 'double':[], 'string':[], 'boolean':[]}
     for pathfile in find_files_with_extension('validator/res/binary', '.m'):
         compiled = os.path.exists(f'{pathfile}aki')
@@ -36,13 +36,14 @@ if 0: #* binary
             op += SYMBOL[part]
             
         status = '✅' if compiled else '❌'
+        op = op.replace('|', '\\|')
         row = f"| {op} | {status} | `x = x {op} y;` | [{type}/{file}]({pathfile}#L15) |"
         print(row)
         typs[type].append(row)
 
     print()
 
-    order = ['+', '-', '*', '/', '%', '&&', '||', '==', '!=', '<<', '>>', '<<<', '>>>']
+    order = ['+', '-', '*', '/', '%', '^', '~', '&', '|',  '&&', '||', '==', '!=', '<<', '>>', '<<<', '>>>']
     def get_sort_key(item):
         # operator = item[0]  # Ambil simbol operator dari tuple
         operator = item.strip(' |').split('|')[0].strip()  # Ambil simbol operator dari tuple
@@ -63,7 +64,7 @@ if 0: #* binary
         print('</details>')
         print()
 
-if 1: #* unary
+if 0: #* unary
     SYMBOL = {
         'star' : '*',
         'eq' : '=',
